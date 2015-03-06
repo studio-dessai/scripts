@@ -40,3 +40,7 @@ for i in os.listdir():
                     featArtistBrainz = re_featArtist.search(track).group(3)
                     print(featArtist)
                     print(featArtistBrainz)
+#               track title
+                re_title = re.compile('\s[-]\s([\w\s]+)\s\(')
+                title = re_title.search(track).group(1)
+
