@@ -21,9 +21,10 @@ for i in os.listdir():
             if len(track) < 1:
                 continue
             else:
-
-
-
-print(tracks)
+#               artist finder
+                re_artist = re.compile('(1.\s\[?([\w\s\d]+)[\]\w])')
+                artist = re_artist.search(track).group(2)
+                print(artist)
+#               brainz link finder
 
 #         print(re_artist.search(track).group())
