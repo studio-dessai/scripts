@@ -1,4 +1,7 @@
-""" Script to extract data from studio d'essai playlists. """
+"""
+Script to extract data from studio d'essai playlists.
+At the moment, I have 'print' commands as feedback. These will eventually be converted so that they output to a file.
+"""
 
 import re # for regex
 import os # for filesystem
@@ -22,14 +25,18 @@ for i in os.listdir():
                 continue
             else:
 #               artist finder
-                re_artist = re.compile('(1.\s\[?([\w\s\d]+)[\]\w])')
-                artist = re_artist.search(track).group(2)
+                re_artist = re.compile('1.\s\[?([\w\s\d]+)[\]\w]')
+                artist = re_artist.search(track).group(1)
                 print(artist)
-#               brainz link finder: laid out weirdly so I can parse the regex in my brain ...
-                re_brainz = re.compile(r'('\
-                                            '\]\('\
-                                                '(\S+musicbrainz.org/\S+)'\
-                                                    '\)'\
-                                                        ')')
+#               brainz link finder
+                re_brainz = re.compile(r'(\]\((\S+musicbrainz.org/\S+)\))')
                 brainz = re_brainz.search(track).group(2)
                 print(brainz)
+#               featured artist
+                re_featArtist = re.compile('feat\.\s\[?([\w\s\d]+)\](\((\S+musicbrainz.org\S+)\))?')
+                if re_featArtist.search(track) is None: pass
+                else:
+                    featArtist = re_featArtist.search(track).group(1)
+                    featArtistBrainz = re_featArtist.search(track).group(3)
+                    print(featArtist)
+                    print(featArtistBrainz)
