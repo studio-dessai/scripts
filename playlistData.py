@@ -25,9 +25,11 @@ for i in os.listdir():
                 re_artist = re.compile('(1.\s\[?([\w\s\d]+)[\]\w])')
                 artist = re_artist.search(track).group(2)
                 print(artist)
-#               brainz link finder
-                re_brainz = re.compile('(\([\w\s\d]+musicbraiz\.org[\w\s\d]+)\)')
-                brainz = re_brainz.search(track).group(1)
+#               brainz link finder: laid out weirdly so I can parse the regex in my brain ...
+                re_brainz = re.compile(r'('\
+                                            '\]\('\
+                                                '(\S+musicbrainz.org/\S+)'\
+                                                    '\)'\
+                                                        ')')
+                brainz = re_brainz.search(track).group(2)
                 print(brainz)
-
-#         print(re_artist.search(track).group())
