@@ -43,4 +43,10 @@ for i in os.listdir():
 #               track title
                 re_title = re.compile('\s[-]\s([\w\s]+)\s\(')
                 title = re_title.search(track).group(1)
-
+#               the remainder (best to do with one regex, as it's super regular)
+                re_otherInf = re.compile('\(_(.+)_,\s+(.+),\s+(.+),\s+(.+)\)')
+                album = re_otherInf.search(track).group(1)
+                label = re_otherInf.search(track).group(2)
+                year = re_otherInf.search(track).group(3)
+                country = re_otherInf.search(track).group(4)
+                print(album, label, year, country)
