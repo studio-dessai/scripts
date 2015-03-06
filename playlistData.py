@@ -26,5 +26,8 @@ for i in os.listdir():
                 artist = re_artist.search(track).group(2)
                 print(artist)
 #               brainz link finder
+                re_brainz = re.compile('(\([\w\s\d]+musicbraiz\.org[\w\s\d]+)\)')
+                brainz = re_brainz.search(track).group(1)
+                print(brainz)
 
 #         print(re_artist.search(track).group())
