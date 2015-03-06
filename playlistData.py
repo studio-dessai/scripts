@@ -27,21 +27,19 @@ for i in os.listdir():
 #               artist finder
                 re_artist = re.compile('1.\s\[?([\w\s\d]+)[\]\w]')
                 artist = re_artist.search(track).group(1)
-                print(artist)
 
 #               brainz link finder
                 re_brainz = re.compile(r'(\]\((\S+musicbrainz.org/\S+)\))')
                 brainz = re_brainz.search(track).group(2)
-                print(brainz)
 
 #               featured artist
                 re_featArtist = re.compile('feat\.\s\[?([\w\s\d]+)\](\((\S+musicbrainz.org\S+)\))?')
-                if re_featArtist.search(track) is None: pass
+                if re_featArtist.search(track) is None:
+                    featArtist = ""
+                    featArtistBrainz = ""
                 else:
                     featArtist = re_featArtist.search(track).group(1)
                     featArtistBrainz = re_featArtist.search(track).group(3)
-                    print(featArtist)
-                    print(featArtistBrainz)
 
 #               track title
                 re_title = re.compile('\s[-]\s([\w\s]+)\s\(')
@@ -53,4 +51,4 @@ for i in os.listdir():
                 label = re_otherInf.search(track).group(2)
                 year = re_otherInf.search(track).group(3)
                 country = re_otherInf.search(track).group(4)
-                print(album, label, year, country)
+                print("1. [{0}]({1}) - {2} (_{3}_, {4}, {5}, {6})".format(artist, brainz, title, album, label, year, country))
