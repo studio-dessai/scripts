@@ -52,9 +52,7 @@ for i in argv[1:]:
             label = re_otherInf.search(track).group(2)
             year = re_otherInf.search(track).group(3)
             country = re_otherInf.search(track).group(4)
-            print("1. [{0}]({1}) - {2} (_{3}_, {4}, {5}, {6})".format(artist, brainz, title, album, label, year, country))
 
-            with open('dat.csv') as ofile:
-                datwriter = csv.writer(ofile, delimeter=',',
-                            quotechar='|', quoting=csv.QUOTE_MINIMAL)
-                datwriter.writerow(artist,brainz,title,album,label,year,country)
+            with open('dat.csv', 'a', newline='\n') as output:
+                datwriter = csv.writer(output, delimiter=',', quoting=csv.QUOTE_MINIMAL)
+                datwriter.writerow([date, artist, brainz, title, album, label, year, country])
