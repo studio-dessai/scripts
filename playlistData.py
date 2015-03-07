@@ -30,8 +30,9 @@ for i in argv[1:]:
             artist = re_artist.search(track).group(1)
 
 #               brainz link finder
-            re_brainz = re.compile(r'(\]\((\S+musicbrainz.org/\S+)\))')
-            brainz = re_brainz.search(track).group(2)
+            re_brainz = re.compile(r'(\]\((\S+musicbrainz.org\/\S+)\))')
+            if re_brainz.search(track) is None: brainz = ""
+            else: brainz = re_brainz.search(track).group(2)
 
 #               featured artist
             re_featArtist = re.compile('feat\.\s\[?([\w\s\d]+)\](\((\S+musicbrainz.org\S+)\))?')
@@ -43,11 +44,13 @@ for i in argv[1:]:
                 featArtistBrainz = re_featArtist.search(track).group(3)
 
 #               track title
-            re_title = re.compile('\s[-]\s([\w\s]+)\s\(')
+            re_title = re.compile('\s[-]\s(.+)\s\(')
             title = re_title.search(track).group(1)
 
 #               the remainder (best to do with one regex, as it's super regular)
             re_otherInf = re.compile('\(_(.+)_,\s+(.+),\s+(.+),\s+(.+)\)')
+            if re_otherInf.search(track) is None:
+                continue
             album = re_otherInf.search(track).group(1)
             label = re_otherInf.search(track).group(2)
             year = re_otherInf.search(track).group(3)
@@ -57,3 +60,4 @@ for i in argv[1:]:
                 # note! opening dat.csv with 'a' allows amending lines instead of writing over them.
                 datwriter = csv.writer(output, delimiter=',', quoting=csv.QUOTE_MINIMAL)
                 datwriter.writerow([date, artist, brainz, title, album, label, year, country])
+    f.close()
