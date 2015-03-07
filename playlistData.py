@@ -54,5 +54,6 @@ for i in argv[1:]:
             country = re_otherInf.search(track).group(4)
 
             with open('dat.csv', 'a', newline='\n') as output:
+                # note! opening dat.csv with 'a' allows amending lines instead of writing over them.
                 datwriter = csv.writer(output, delimiter=',', quoting=csv.QUOTE_MINIMAL)
                 datwriter.writerow([date, artist, brainz, title, album, label, year, country])
