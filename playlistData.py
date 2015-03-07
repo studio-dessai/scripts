@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """
 Script to extract data from studio d'essai playlists.
 At the moment, I have 'print' commands as feedback. These will eventually be converted so that they output to a file.
