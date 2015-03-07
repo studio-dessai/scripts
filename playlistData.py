@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 """
 Script to extract data from studio d'essai playlists.
-At the moment, I have 'print' commands as feedback. These will eventually be converted so that they output to a file.
 """
 
 import re # for regex
@@ -61,11 +60,10 @@ for i in argv[1:]:
                     # note! opening dat.csv with 'a' allows amending lines instead of writing over them.
                     datwriter = csv.writer(output, delimiter=',', quoting=csv.QUOTE_MINIMAL)
                     datwriter.writerow([date, artist, brainz, title, album, label, year, country])
-            except:
+
+        except:
                 with open('dat.csv', 'a', newline='\n') as output:
                     datwriter = csv.writer(output, delimiter=',', quoting=csv.QUOTE_MINIMAL)
                     datwriter.writerow(['irregular: needs manual input'])
                 continue
-
-
     f.close()
